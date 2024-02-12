@@ -3,10 +3,9 @@ package kea.exercise.person.controller;
 import kea.exercise.person.model.Person;
 import kea.exercise.person.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -33,7 +32,11 @@ public class PersonController {
         return ResponseEntity.of(person);
     }
 
-
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/persons")
+    public Person createPerson(@RequestBody Person person) {
+        return personRepository.save(person);
+    }
 
 
 }
